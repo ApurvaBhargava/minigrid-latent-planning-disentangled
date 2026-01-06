@@ -2,7 +2,7 @@
 
 
 
-This project involves first training a reward-free JEPA planning model based on Planning with Latent Dynamics Model (PLDM) paper [(Sobal et al, 2025)](https://arxiv.org/html/2502.14819) using BFS optimal + noisy trajectories from the MiniGrid DoorKey 5×5 environment and analyzing its learned latent dynamics. Building on this baseline, I then introduce a disentangled PLDM variant to examine how separating latent factors influences representation quality and downstream planning performance.
+This project involves first training a reward-free JEPA planning model based on Planning with Latent Dynamics Model (PLDM) paper [(Sobal et al, 2025)](https://latent-planning.github.io/static/paper.pdf) using BFS optimal + noisy trajectories from the MiniGrid DoorKey 5×5 environment and analyzing its learned latent dynamics. Building on this baseline, I then introduce a disentangled PLDM variant to examine how separating latent factors influences representation quality and downstream planning performance.
 
 
 
@@ -351,43 +351,31 @@ Custom DoorKey configurations are also supported with configurable key, door, an
 
 
 
-## Tips
+## Notes
 
 
 
 1. **GPU Usage**: The code automatically detects MPS (Apple Silicon), CUDA, or falls back to CPU.
 
-
-
 2. **Data Collection**: BFS trajectories provide optimal demonstrations. Random trajectories add exploration diversity.
 
-
-
-3. **Replanning**: Lower replan frequencies (1-3) generally give better success rates but require more computation.
-
-
+3. **Replanning**: Mid-range replan frequencies (6-9) generally give better success rates but require more computation.
 
 4. **Latent Dimension**: 128 works well for 5x5 environments. Larger environments may need higher dimensions.
-
-
-
-5. **Training Time**: ~20-30 minutes on Apple M1/M2 for 100 epochs with 1200 trajectories.
-
 
 
 ## References
 
 
-
 This implementation is based on concepts from:
 
-
+- [PLDM](https://latent-planning.github.io/static/paper.pdf) (Planning With Latent Dynamics Model)
 
 - JEPA (Joint Embedding Predictive Architecture)
 
 - VICReg (Variance-Invariance-Covariance Regularization)
 
-- MiniGrid environment suite
+- [MiniGrid environment suite](https://minigrid.farama.org/index.html)
 
 
 
