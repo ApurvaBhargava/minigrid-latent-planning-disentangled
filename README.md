@@ -2,7 +2,7 @@
 
 
 
-This project involves first training a reward-free JEPA planning model based on Planning with Latent Dynamics Model (PLDM) paper (Sobal et al, 2025) using BFS optimal + noisy trajectories from the MiniGrid DoorKey 5×5 environment and analyzing its learned latent dynamics. Building on this baseline, I then introduce a disentangled PLDM variant to examine how separating latent factors influences representation quality and downstream planning performance.
+This project involves first training a reward-free JEPA planning model based on Planning with Latent Dynamics Model (PLDM) paper [(Sobal et al, 2025)](https://arxiv.org/html/2502.14819) using BFS optimal + noisy trajectories from the MiniGrid DoorKey 5×5 environment and analyzing its learned latent dynamics. Building on this baseline, I then introduce a disentangled PLDM variant to examine how separating latent factors influences representation quality and downstream planning performance.
 
 
 
@@ -12,7 +12,7 @@ The write-up on the project is available [here](https://apurvabhargava.github.io
 
 
 
-\# PLDM for MiniGrid DoorKey
+# PLDM for MiniGrid DoorKey
 
 
 
@@ -20,7 +20,7 @@ A PyTorch implementation of Predictive Latent Dynamics Models (PLDM) for goal-co
 
 
 
-\## Overview
+## Overview
 
 
 
@@ -28,27 +28,27 @@ This repository implements:
 
 
 
-\- \*\*PLDM Architecture\*\*: Encoder + Predictor for learning latent dynamics
+- **PLDM Architecture**: Encoder + Predictor for learning latent dynamics
 
-\- \*\*VICReg Training\*\*: Self-supervised loss with variance and covariance regularization
+- **VICReg Training**: Self-supervised loss with variance and covariance regularization
 
-\- \*\*CEM Planner\*\*: Planning in latent space to reach goal states
+- **CEM Planner**: Planning in latent space to reach goal states
 
-\- \*\*Custom Environments\*\*: Configurable DoorKey-5x5 variants for testing generalization
+- **Custom Environments**: Configurable DoorKey-5x5 variants for testing generalization
 
 
 
-\## Repository Structure
+## Repository Structure
 
 
 
 ```
 
-pldm\_entangled\_repo/
+pldm_entangled_repo/
 
 |-- models/
 
-|   |-- \_\_init\_\_.py
+|   |-- __init__.py
 
 |   |-- encoder.py       # FlexibleEncoder that adapts to observation size
 
@@ -58,7 +58,7 @@ pldm\_entangled\_repo/
 
 |-- utils/
 
-|   |-- \_\_init\_\_.py
+|   |-- __init__.py
 
 |   |-- environment.py   # MiniGrid environment utilities
 
@@ -68,7 +68,7 @@ pldm\_entangled\_repo/
 
 |   |-- planner.py       # CEM planner for latent space planning
 
-|   |-- custom\_env.py    # Custom DoorKey-5x5 environment
+|   |-- custom_env.py    # Custom DoorKey-5x5 environment
 
 |-- outputs/             # Default output directory (created at runtime)
 
@@ -88,37 +88,37 @@ pldm\_entangled\_repo/
 
 
 
-\## Installation
+## Installation
 
 
 
-1\. Clone or copy this repository
+1. Clone or copy this repository
 
-2\. Create a virtual environment (recommended):
+2. Create a virtual environment (recommended):
 
-&nbsp;  ```bash
+  ```bash
 
-&nbsp;  python -m venv venv
+  python -m venv venv
 
-&nbsp;  source venv/bin/activate  # On Windows: venv\\Scripts\\activate
+  source venv/bin/activate  # On Windows: venv\\Scripts\\activate
 
-&nbsp;  ```
+  ```
 
-3\. Install dependencies:
+3. Install dependencies:
 
-&nbsp;  ```bash
+  ```bash
 
-&nbsp;  pip install -r requirements.txt
+  pip install -r requirements.txt
 
-&nbsp;  ```
-
-
-
-\## Usage
+  ```
 
 
 
-\### Training
+## Usage
+
+
+
+### Training
 
 
 
@@ -128,39 +128,39 @@ Train a PLDM model on MiniGrid-DoorKey-5x5:
 
 ```bash
 
-\# Basic training with default parameters
+# Basic training with default parameters
 
-python train.py --output\_dir outputs/my\_run
+python train.py --output_dir outputs/my_run
 
 
 
-\# Training with custom parameters
+# Training with custom parameters
 
 python train.py \\
 
-&nbsp;   --output\_dir outputs/my\_run \\
+   --output_dir outputs/my_run \\
 
-&nbsp;   --num\_trajectories 2000 \\
+   --num_trajectories 2000 \\
 
-&nbsp;   --epochs 150 \\
+   --epochs 150 \\
 
-&nbsp;   --lr 1e-4 \\
+   --lr 1e-4 \\
 
-&nbsp;   --batch\_size 64 \\
+   --batch_size 64 \\
 
-&nbsp;   --latent\_dim 128
+   --latent_dim 128
 
 
 
-\# Resume training from checkpoint
+# Resume training from checkpoint
 
-python train.py --output\_dir outputs/my\_run --resume
+python train.py --output_dir outputs/my_run --resume
 
 ```
 
 
 
-\#### Training Arguments
+#### Training Arguments
 
 
 
@@ -168,33 +168,33 @@ python train.py --output\_dir outputs/my\_run --resume
 
 |----------|---------|-------------|
 
-| `--output\_dir` | `outputs/default` | Directory for checkpoints and logs |
+| `--output_dir` | `outputs/default` | Directory for checkpoints and logs |
 
-| `--env\_name` | `MiniGrid-DoorKey-5x5-v0` | MiniGrid environment |
+| `--env_name` | `MiniGrid-DoorKey-5x5-v0` | MiniGrid environment |
 
-| `--num\_trajectories` | 1200 | Number of training trajectories |
+| `--num_trajectories` | 1200 | Number of training trajectories |
 
-| `--bfs\_ratio` | 0.8 | Fraction of optimal (BFS) trajectories |
+| `--bfs_ratio` | 0.8 | Fraction of optimal (BFS) trajectories |
 
 | `--epochs` | 100 | Training epochs |
 
-| `--batch\_size` | 64 | Batch size |
+| `--batch_size` | 64 | Batch size |
 
 | `--lr` | 3e-4 | Learning rate |
 
-| `--latent\_dim` | 128 | Latent space dimension |
+| `--latent_dim` | 128 | Latent space dimension |
 
-| `--sim\_coeff` | 1.0 | Similarity loss weight |
+| `--sim_coeff` | 1.0 | Similarity loss weight |
 
-| `--std\_coeff` | 1.0 | Variance loss weight |
+| `--std_coeff` | 1.0 | Variance loss weight |
 
-| `--cov\_coeff` | 0.04 | Covariance loss weight |
+| `--cov_coeff` | 0.04 | Covariance loss weight |
 
 | `--resume` | False | Resume from checkpoint |
 
 
 
-\### Evaluation
+### Evaluation
 
 
 
@@ -204,69 +204,69 @@ Evaluate a trained model:
 
 ```bash
 
-\# Basic evaluation
+# Basic evaluation
 
-python evaluate.py --model\_path outputs/my\_run/checkpoints/best\_model.pt
-
-
-
-\# Evaluation with custom settings
-
-python evaluate.py \\
-
-&nbsp;   --model\_path outputs/my\_run/checkpoints/best\_model.pt \\
-
-&nbsp;   --num\_episodes 50 \\
-
-&nbsp;   --replan\_every 3 \\
-
-&nbsp;   --output\_dir outputs/my\_run/evaluation
+python evaluate.py --model_path outputs/my_run/checkpoints/best_model.pt
 
 
 
-\# Replanning frequency analysis
+# Evaluation with custom settings
 
 python evaluate.py \\
 
-&nbsp;   --model\_path outputs/my\_run/checkpoints/best\_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \\
 
-&nbsp;   --replan\_analysis \\
+   --num_episodes 50 \\
 
-&nbsp;   --replan\_values 1 3 6 9 12 15 \\
+   --replan_every 3 \\
 
-&nbsp;   --output\_dir outputs/my\_run/replan\_analysis
-
-
-
-\# Test generalization to simpler environments
-
-python evaluate.py \\
-
-&nbsp;   --model\_path outputs/my\_run/checkpoints/best\_model.pt \\
-
-&nbsp;   --env\_name MiniGrid-Empty-5x5-v0 \\
-
-&nbsp;   --output\_dir outputs/my\_run/generalization
+   --output_dir outputs/my_run/evaluation
 
 
 
-\# Evaluate on custom DoorKey configurations
+# Replanning frequency analysis
 
 python evaluate.py \\
 
-&nbsp;   --model\_path outputs/my\_run/checkpoints/best\_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \\
 
-&nbsp;   --custom\_configs \\
+   --replan_analysis \\
 
-&nbsp;   --num\_trials\_per\_config 4 \\
+   --replan_values 1 3 6 9 12 15 \\
 
-&nbsp;   --output\_dir outputs/my\_run/custom\_eval
+   --output_dir outputs/my_run/replan_analysis
+
+
+
+# Test generalization to simpler environments
+
+python evaluate.py \\
+
+   --model_path outputs/my_run/checkpoints/best_model.pt \\
+
+   --env_name MiniGrid-Empty-5x5-v0 \\
+
+   --output_dir outputs/my_run/generalization
+
+
+
+# Evaluate on custom DoorKey configurations
+
+python evaluate.py \\
+
+   --model_path outputs/my_run/checkpoints/best_model.pt \\
+
+   --custom_configs \\
+
+   --num_trials_per_config 4 \\
+
+   --output_dir outputs/my_run/custom_eval
 
 ```
 
 
 
-\#### Evaluation Arguments
+#### Evaluation Arguments
 
 
 
@@ -274,25 +274,25 @@ python evaluate.py \\
 
 |----------|---------|-------------|
 
-| `--model\_path` | Required | Path to model checkpoint |
+| `--model_path` | Required | Path to model checkpoint |
 
-| `--num\_episodes` | 50 | Number of evaluation episodes |
+| `--num_episodes` | 50 | Number of evaluation episodes |
 
-| `--max\_steps` | 30 | Max steps per episode |
+| `--max_steps` | 30 | Max steps per episode |
 
-| `--replan\_every` | 1 | Replan frequency |
+| `--replan_every` | 1 | Replan frequency |
 
 | `--horizon` | 15 | Planning horizon |
 
-| `--replan\_analysis` | False | Run replan frequency analysis |
+| `--replan_analysis` | False | Run replan frequency analysis |
 
-| `--replan\_values` | `\[1,3,6,9,12,15]` | Replan values to test |
+| `--replan_values` | `\[1,3,6,9,12,15]` | Replan values to test |
 
-| `--custom\_configs` | False | Evaluate on custom DoorKey configs |
+| `--custom_configs` | False | Evaluate on custom DoorKey configs |
 
 
 
-\### Visualization
+### Visualization
 
 
 
@@ -302,105 +302,105 @@ Generate visualizations from training and evaluation:
 
 ```bash
 
-\# Training loss curves
+# Training loss curves
 
 python visualize.py \\
 
-&nbsp;   --mode training\_curves \\
+   --mode training_curves \\
 
-&nbsp;   --history\_path outputs/my\_run/training\_history.json \\
+   --history_path outputs/my_run/training_history.json \\
 
-&nbsp;   --output\_dir outputs/my\_run/visualizations
-
-
-
-\# Latent space visualization (PCA)
-
-python visualize.py \\
-
-&nbsp;   --mode latent\_space \\
-
-&nbsp;   --model\_path outputs/my\_run/checkpoints/best\_model.pt \\
-
-&nbsp;   --output\_dir outputs/my\_run/visualizations
+   --output_dir outputs/my_run/visualizations
 
 
 
-\# BFS trajectory visualization
+# Latent space visualization (PCA)
 
 python visualize.py \\
 
-&nbsp;   --mode bfs\_trajectories \\
+   --mode latent_space \\
 
-&nbsp;   --seeds 1 2 4 \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \\
 
-&nbsp;   --output\_dir outputs/my\_run/visualizations
-
-
-
-\# Planning episode visualization
-
-python visualize.py \\
-
-&nbsp;   --mode planning \\
-
-&nbsp;   --model\_path outputs/my\_run/checkpoints/best\_model.pt \\
-
-&nbsp;   --output\_dir outputs/my\_run/visualizations
+   --output_dir outputs/my_run/visualizations
 
 
 
-\# Replan frequency comparison (requires evaluation results)
+# BFS trajectory visualization
 
 python visualize.py \\
 
-&nbsp;   --mode replan\_comparison \\
+   --mode bfs_trajectories \\
 
-&nbsp;   --results\_path outputs/my\_run/evaluation/evaluation\_results.json \\
+   --seeds 1 2 4 \\
 
-&nbsp;   --output\_dir outputs/my\_run/visualizations
-
-
-
-\# Environment comparison (shows different MiniGrid environments)
-
-python visualize.py \\
-
-&nbsp;   --mode env\_comparison \\
-
-&nbsp;   --output\_dir outputs/my\_run/visualizations
+   --output_dir outputs/my_run/visualizations
 
 
 
-\# Episode execution with distance trajectory plots
+# Planning episode visualization
 
 python visualize.py \\
 
-&nbsp;   --mode episode\_distances \\
+   --mode planning \\
 
-&nbsp;   --model\_path outputs/my\_run/checkpoints/best\_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \\
 
-&nbsp;   --output\_dir outputs/my\_run/visualizations
+   --output_dir outputs/my_run/visualizations
 
 
 
-\# Generate all visualizations
+# Replan frequency comparison (requires evaluation results)
 
 python visualize.py \\
 
-&nbsp;   --mode all \\
+   --mode replan_comparison \\
 
-&nbsp;   --model\_path outputs/my\_run/checkpoints/best\_model.pt \\
+   --results_path outputs/my_run/evaluation/evaluation_results.json \\
 
-&nbsp;   --history\_path outputs/my\_run/training\_history.json \\
+   --output_dir outputs/my_run/visualizations
 
-&nbsp;   --output\_dir outputs/my\_run/visualizations
+
+
+# Environment comparison (shows different MiniGrid environments)
+
+python visualize.py \\
+
+   --mode env_comparison \\
+
+   --output_dir outputs/my_run/visualizations
+
+
+
+# Episode execution with distance trajectory plots
+
+python visualize.py \\
+
+   --mode episode_distances \\
+
+   --model_path outputs/my_run/checkpoints/best_model.pt \\
+
+   --output_dir outputs/my_run/visualizations
+
+
+
+# Generate all visualizations
+
+python visualize.py \\
+
+   --mode all \\
+
+   --model_path outputs/my_run/checkpoints/best_model.pt \\
+
+   --history_path outputs/my_run/training_history.json \\
+
+   --output_dir outputs/my_run/visualizations
 
 ```
 
 
 
-\## Output Files
+## Output Files
 
 
 
@@ -410,85 +410,85 @@ After training and evaluation, the output directory will contain:
 
 ```
 
-outputs/my\_run/
+outputs/my_run/
 
 |-- config.json                    # Training configuration
 
-|-- training\_history.json          # Loss values per epoch
+|-- training_history.json          # Loss values per epoch
 
 |-- checkpoints/
 
-|   |-- best\_model.pt              # Best validation checkpoint
+|   |-- best_model.pt              # Best validation checkpoint
 
-|   |-- final\_model.pt             # Final epoch checkpoint
+|   |-- final_model.pt             # Final epoch checkpoint
 
-|   |-- latest\_checkpoint.pt       # Full checkpoint for resuming
+|   |-- latest_checkpoint.pt       # Full checkpoint for resuming
 
 |-- evaluation/
 
-|   |-- evaluation\_results.json    # Evaluation metrics
+|   |-- evaluation_results.json    # Evaluation metrics
 
 |-- visualizations/
 
-|   |-- training\_curves.png        # Loss curves
+|   |-- training_curves.png        # Loss curves
 
-|   |-- latent\_space.png           # PCA visualization
+|   |-- latent_space.png           # PCA visualization
 
-|   |-- planning\_episode.png       # Planning progress
+|   |-- planning_episode.png       # Planning progress
 
-|   |-- replan\_comparison.png      # Replan frequency analysis
+|   |-- replan_comparison.png      # Replan frequency analysis
 
-|   |-- env\_comparison.png         # MiniGrid environments comparison
+|   |-- env_comparison.png         # MiniGrid environments comparison
 
-|   |-- episode\_N\_trajectory.png   # Step-by-step episode execution
+|   |-- episode_N_trajectory.png   # Step-by-step episode execution
 
-|   |-- episode\_N\_distances.png    # Distance to goal over time
+|   |-- episode_N_distances.png    # Distance to goal over time
 
 ```
 
 
 
-\## Model Architecture
+## Model Architecture
 
 
 
-\### Encoder (FlexibleEncoder)
+### Encoder (FlexibleEncoder)
 
 
 
-\- 3 convolutional layers with stride 2 (downsampling)
+- 3 convolutional layers with stride 2 (downsampling)
 
-\- Adaptive FC layers initialized on first forward pass
+- Adaptive FC layers initialized on first forward pass
 
-\- Handles both single observations and sequences
-
-
-
-\### Predictor
+- Handles both single observations and sequences
 
 
 
-\- Action embedding layer
-
-\- 3-layer MLP with residual connection
-
-\- Predicts next latent state from current state and action
+### Predictor
 
 
 
-\### VICReg Loss
+- Action embedding layer
+
+- 3-layer MLP with residual connection
+
+- Predicts next latent state from current state and action
 
 
 
-\- Similarity: MSE between predicted and target latent states
-
-\- Variance: Encourages each latent dimension to have unit variance
-
-\- Covariance: Decorrelates latent dimensions to prevent collapse
+### VICReg Loss
 
 
 
-\## Environments
+- Similarity: MSE between predicted and target latent states
+
+- Variance: Encourages each latent dimension to have unit variance
+
+- Covariance: Decorrelates latent dimensions to prevent collapse
+
+
+
+## Environments
 
 
 
@@ -496,13 +496,13 @@ The code supports all MiniGrid 5x5 environments:
 
 
 
-\- `MiniGrid-DoorKey-5x5-v0` (default, trained on this)
+- `MiniGrid-DoorKey-5x5-v0` (default, trained on this)
 
-\- `MiniGrid-Empty-5x5-v0`
+- `MiniGrid-Empty-5x5-v0`
 
-\- `MiniGrid-Empty-Random-5x5-v0`
+- `MiniGrid-Empty-Random-5x5-v0`
 
-\- `MiniGrid-Dynamic-Obstacles-5x5-v0`
+- `MiniGrid-Dynamic-Obstacles-5x5-v0`
 
 
 
@@ -510,31 +510,31 @@ Custom DoorKey configurations are also supported with configurable key, door, an
 
 
 
-\## Tips
+## Tips
 
 
 
-1\. \*\*GPU Usage\*\*: The code automatically detects MPS (Apple Silicon), CUDA, or falls back to CPU.
+1. **GPU Usage**: The code automatically detects MPS (Apple Silicon), CUDA, or falls back to CPU.
 
 
 
-2\. \*\*Data Collection\*\*: BFS trajectories provide optimal demonstrations. Random trajectories add exploration diversity.
+2. **Data Collection**: BFS trajectories provide optimal demonstrations. Random trajectories add exploration diversity.
 
 
 
-3\. \*\*Replanning\*\*: Lower replan frequencies (1-3) generally give better success rates but require more computation.
+3. **Replanning**: Lower replan frequencies (1-3) generally give better success rates but require more computation.
 
 
 
-4\. \*\*Latent Dimension\*\*: 128 works well for 5x5 environments. Larger environments may need higher dimensions.
+4. **Latent Dimension**: 128 works well for 5x5 environments. Larger environments may need higher dimensions.
 
 
 
-5\. \*\*Training Time\*\*: ~20-30 minutes on Apple M1/M2 for 100 epochs with 1200 trajectories.
+5. **Training Time**: ~20-30 minutes on Apple M1/M2 for 100 epochs with 1200 trajectories.
 
 
 
-\## References
+## References
 
 
 
@@ -542,11 +542,11 @@ This implementation is based on concepts from:
 
 
 
-\- JEPA (Joint Embedding Predictive Architecture)
+- JEPA (Joint Embedding Predictive Architecture)
 
-\- VICReg (Variance-Invariance-Covariance Regularization)
+- VICReg (Variance-Invariance-Covariance Regularization)
 
-\- MiniGrid environment suite
+- MiniGrid environment suite
 
 
 
