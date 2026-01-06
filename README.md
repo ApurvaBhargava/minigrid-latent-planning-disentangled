@@ -12,7 +12,7 @@ The write-up on the project is available [here](https://apurvabhargava.github.io
 
 
 
-# PLDM for MiniGrid DoorKey
+## PLDM for MiniGrid DoorKey
 
 
 
