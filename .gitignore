@@ -41,6 +41,10 @@ outputs/
 visualizations/
 checkpoints/
 
+# Model files
+*.pt
+*.pth
+
 # Data files
 *.csv
 *.json
