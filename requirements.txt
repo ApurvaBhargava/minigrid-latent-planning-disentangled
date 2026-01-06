@@ -1,0 +1,26 @@
+# PLDM for MiniGrid - Requirements
+# Install with: pip install -r requirements.txt
+
+# Core ML
+torch>=2.0.0
+numpy>=1.26.0
+
+# MiniGrid environment
+gymnasium>=0.28.0
+minigrid>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+Pillow>=10.0.0
+
+# Scientific computing
+scipy>=1.10.0
+scikit-learn>=1.3.0
+
+# Utilities
+tqdm>=4.65.0
+
+# Analysis
+seaborn>=0.12.0
+pandas>=2.0.0
+
