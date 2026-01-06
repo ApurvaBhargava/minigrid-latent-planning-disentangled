@@ -100,7 +100,7 @@ pldm_entangled_repo/
 
   python -m venv venv
 
-  source venv/bin/activate  # On Windows: venv\\Scripts\\activate
+  source venv/bin/activate  # On Windows: venv\Scripts\activate
 
   ```
 
@@ -136,17 +136,17 @@ python train.py --output_dir outputs/my_run
 
 # Training with custom parameters
 
-python train.py \\
+python train.py \
 
-   --output_dir outputs/my_run \\
+   --output_dir outputs/my_run \
 
-   --num_trajectories 2000 \\
+   --num_trajectories 2000 \
 
-   --epochs 150 \\
+   --epochs 150 \
 
-   --lr 1e-4 \\
+   --lr 1e-4 \
 
-   --batch_size 64 \\
+   --batch_size 64 \
 
    --latent_dim 128
 
@@ -165,31 +165,18 @@ python train.py --output_dir outputs/my_run --resume
 
 
 | Argument | Default | Description |
-
 |----------|---------|-------------|
-
 | `--output_dir` | `outputs/default` | Directory for checkpoints and logs |
-
 | `--env_name` | `MiniGrid-DoorKey-5x5-v0` | MiniGrid environment |
-
 | `--num_trajectories` | 1200 | Number of training trajectories |
-
 | `--bfs_ratio` | 0.8 | Fraction of optimal (BFS) trajectories |
-
 | `--epochs` | 100 | Training epochs |
-
 | `--batch_size` | 64 | Batch size |
-
 | `--lr` | 3e-4 | Learning rate |
-
 | `--latent_dim` | 128 | Latent space dimension |
-
 | `--sim_coeff` | 1.0 | Similarity loss weight |
-
 | `--std_coeff` | 1.0 | Variance loss weight |
-
 | `--cov_coeff` | 0.04 | Covariance loss weight |
-
 | `--resume` | False | Resume from checkpoint |
 
 
@@ -212,13 +199,13 @@ python evaluate.py --model_path outputs/my_run/checkpoints/best_model.pt
 
 # Evaluation with custom settings
 
-python evaluate.py \\
+python evaluate.py \
 
-   --model_path outputs/my_run/checkpoints/best_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \
 
-   --num_episodes 50 \\
+   --num_episodes 50 \
 
-   --replan_every 3 \\
+   --replan_every 3 \
 
    --output_dir outputs/my_run/evaluation
 
@@ -226,13 +213,13 @@ python evaluate.py \\
 
 # Replanning frequency analysis
 
-python evaluate.py \\
+python evaluate.py \
 
-   --model_path outputs/my_run/checkpoints/best_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \
 
-   --replan_analysis \\
+   --replan_analysis \
 
-   --replan_values 1 3 6 9 12 15 \\
+   --replan_values 1 3 6 9 12 15 \
 
    --output_dir outputs/my_run/replan_analysis
 
@@ -240,11 +227,11 @@ python evaluate.py \\
 
 # Test generalization to simpler environments
 
-python evaluate.py \\
+python evaluate.py \
 
-   --model_path outputs/my_run/checkpoints/best_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \
 
-   --env_name MiniGrid-Empty-5x5-v0 \\
+   --env_name MiniGrid-Empty-5x5-v0 \
 
    --output_dir outputs/my_run/generalization
 
@@ -252,13 +239,13 @@ python evaluate.py \\
 
 # Evaluate on custom DoorKey configurations
 
-python evaluate.py \\
+python evaluate.py \
 
-   --model_path outputs/my_run/checkpoints/best_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \
 
-   --custom_configs \\
+   --custom_configs \
 
-   --num_trials_per_config 4 \\
+   --num_trials_per_config 4 \
 
    --output_dir outputs/my_run/custom_eval
 
@@ -271,23 +258,14 @@ python evaluate.py \\
 
 
 | Argument | Default | Description |
-
 |----------|---------|-------------|
-
 | `--model_path` | Required | Path to model checkpoint |
-
 | `--num_episodes` | 50 | Number of evaluation episodes |
-
 | `--max_steps` | 30 | Max steps per episode |
-
 | `--replan_every` | 1 | Replan frequency |
-
 | `--horizon` | 15 | Planning horizon |
-
 | `--replan_analysis` | False | Run replan frequency analysis |
-
 | `--replan_values` | `\[1,3,6,9,12,15]` | Replan values to test |
-
 | `--custom_configs` | False | Evaluate on custom DoorKey configs |
 
 
@@ -304,11 +282,11 @@ Generate visualizations from training and evaluation:
 
 # Training loss curves
 
-python visualize.py \\
+python visualize.py \
 
-   --mode training_curves \\
+   --mode training_curves \
 
-   --history_path outputs/my_run/training_history.json \\
+   --history_path outputs/my_run/training_history.json \
 
    --output_dir outputs/my_run/visualizations
 
@@ -316,11 +294,11 @@ python visualize.py \\
 
 # Latent space visualization (PCA)
 
-python visualize.py \\
+python visualize.py \
 
-   --mode latent_space \\
+   --mode latent_space \
 
-   --model_path outputs/my_run/checkpoints/best_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \
 
    --output_dir outputs/my_run/visualizations
 
@@ -328,11 +306,11 @@ python visualize.py \\
 
 # BFS trajectory visualization
 
-python visualize.py \\
+python visualize.py \
 
-   --mode bfs_trajectories \\
+   --mode bfs_trajectories \
 
-   --seeds 1 2 4 \\
+   --seeds 1 2 4 \
 
    --output_dir outputs/my_run/visualizations
 
@@ -340,11 +318,11 @@ python visualize.py \\
 
 # Planning episode visualization
 
-python visualize.py \\
+python visualize.py \
 
-   --mode planning \\
+   --mode planning \
 
-   --model_path outputs/my_run/checkpoints/best_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \
 
    --output_dir outputs/my_run/visualizations
 
@@ -352,11 +330,11 @@ python visualize.py \\
 
 # Replan frequency comparison (requires evaluation results)
 
-python visualize.py \\
+python visualize.py \
 
-   --mode replan_comparison \\
+   --mode replan_comparison \
 
-   --results_path outputs/my_run/evaluation/evaluation_results.json \\
+   --results_path outputs/my_run/evaluation/evaluation_results.json \
 
    --output_dir outputs/my_run/visualizations
 
@@ -364,9 +342,9 @@ python visualize.py \\
 
 # Environment comparison (shows different MiniGrid environments)
 
-python visualize.py \\
+python visualize.py \
 
-   --mode env_comparison \\
+   --mode env_comparison \
 
    --output_dir outputs/my_run/visualizations
 
@@ -374,11 +352,11 @@ python visualize.py \\
 
 # Episode execution with distance trajectory plots
 
-python visualize.py \\
+python visualize.py \
 
-   --mode episode_distances \\
+   --mode episode_distances \
 
-   --model_path outputs/my_run/checkpoints/best_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \
 
    --output_dir outputs/my_run/visualizations
 
@@ -386,13 +364,13 @@ python visualize.py \\
 
 # Generate all visualizations
 
-python visualize.py \\
+python visualize.py \
 
-   --mode all \\
+   --mode all \
 
-   --model_path outputs/my_run/checkpoints/best_model.pt \\
+   --model_path outputs/my_run/checkpoints/best_model.pt \
 
-   --history_path outputs/my_run/training_history.json \\
+   --history_path outputs/my_run/training_history.json \
 
    --output_dir outputs/my_run/visualizations
 
