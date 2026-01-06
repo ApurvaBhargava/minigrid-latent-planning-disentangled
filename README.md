@@ -200,13 +200,9 @@ python evaluate.py --model_path outputs/my_run/checkpoints/best_model.pt
 # Evaluation with custom settings
 
 python evaluate.py \
-
    --model_path outputs/my_run/checkpoints/best_model.pt \
-
    --num_episodes 50 \
-
    --replan_every 3 \
-
    --output_dir outputs/my_run/evaluation
 
 
