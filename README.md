@@ -43,47 +43,26 @@ This repository implements:
 
 
 ```
-
 pldm_entangled_repo/
-
 |-- models/
-
 |   |-- __init__.py
-
 |   |-- encoder.py       # FlexibleEncoder that adapts to observation size
-
 |   |-- predictor.py     # Dynamics predictor for latent transitions
-
 |   |-- pldm.py          # Complete PLDM model
-
 |-- utils/
-
 |   |-- __init__.py
-
 |   |-- environment.py   # MiniGrid environment utilities
-
 |   |-- data.py          # Data collection and dataset classes
-
 |   |-- losses.py        # VICReg loss function
-
 |   |-- planner.py       # CEM planner for latent space planning
-
 |   |-- custom_env.py    # Custom DoorKey-5x5 environment
-
 |-- outputs/             # Default output directory (created at runtime)
-
 |-- visualizations/      # Default visualization directory (created at runtime)
-
 |-- train.py             # Training script with CLI
-
 |-- evaluate.py          # Evaluation script with CLI
-
 |-- visualize.py         # Visualization generation script
-
 |-- requirements.txt     # Python dependencies
-
 |-- README.md            # This file
-
 ```
 
 
@@ -97,19 +76,14 @@ pldm_entangled_repo/
 2. Create a virtual environment (recommended):
 
   ```bash
-
   python -m venv venv
-
   source venv/bin/activate  # On Windows: venv\Scripts\activate
-
   ```
 
 3. Install dependencies:
 
   ```bash
-
   pip install -r requirements.txt
-
   ```
 
 
@@ -127,35 +101,20 @@ Train a PLDM model on MiniGrid-DoorKey-5x5:
 
 
 ```bash
-
 # Basic training with default parameters
-
 python train.py --output_dir outputs/my_run
 
-
-
 # Training with custom parameters
-
 python train.py \
-
    --output_dir outputs/my_run \
-
    --num_trajectories 2000 \
-
    --epochs 150 \
-
    --lr 1e-4 \
-
    --batch_size 64 \
-
    --latent_dim 128
 
-
-
 # Resume training from checkpoint
-
 python train.py --output_dir outputs/my_run --resume
-
 ```
 
 
@@ -190,61 +149,35 @@ Evaluate a trained model:
 
 
 ```bash
-
 # Basic evaluation
-
 python evaluate.py --model_path outputs/my_run/checkpoints/best_model.pt
 
-
-
 # Evaluation with custom settings
-
 python evaluate.py \
    --model_path outputs/my_run/checkpoints/best_model.pt \
    --num_episodes 50 \
    --replan_every 3 \
    --output_dir outputs/my_run/evaluation
 
-
-
 # Replanning frequency analysis
-
 python evaluate.py \
-
    --model_path outputs/my_run/checkpoints/best_model.pt \
-
    --replan_analysis \
-
    --replan_values 1 3 6 9 12 15 \
-
    --output_dir outputs/my_run/replan_analysis
 
-
-
 # Test generalization to simpler environments
-
 python evaluate.py \
-
    --model_path outputs/my_run/checkpoints/best_model.pt \
-
    --env_name MiniGrid-Empty-5x5-v0 \
-
    --output_dir outputs/my_run/generalization
 
-
-
 # Evaluate on custom DoorKey configurations
-
 python evaluate.py \
-
    --model_path outputs/my_run/checkpoints/best_model.pt \
-
    --custom_configs \
-
    --num_trials_per_config 4 \
-
    --output_dir outputs/my_run/custom_eval
-
 ```
 
 
@@ -275,101 +208,53 @@ Generate visualizations from training and evaluation:
 
 
 ```bash
-
 # Training loss curves
-
 python visualize.py \
-
    --mode training_curves \
-
    --history_path outputs/my_run/training_history.json \
-
    --output_dir outputs/my_run/visualizations
-
-
 
 # Latent space visualization (PCA)
-
 python visualize.py \
-
    --mode latent_space \
-
    --model_path outputs/my_run/checkpoints/best_model.pt \
-
    --output_dir outputs/my_run/visualizations
-
-
 
 # BFS trajectory visualization
-
 python visualize.py \
-
    --mode bfs_trajectories \
-
    --seeds 1 2 4 \
-
    --output_dir outputs/my_run/visualizations
-
-
 
 # Planning episode visualization
-
 python visualize.py \
-
    --mode planning \
-
    --model_path outputs/my_run/checkpoints/best_model.pt \
-
    --output_dir outputs/my_run/visualizations
-
-
 
 # Replan frequency comparison (requires evaluation results)
-
 python visualize.py \
-
    --mode replan_comparison \
-
    --results_path outputs/my_run/evaluation/evaluation_results.json \
-
    --output_dir outputs/my_run/visualizations
-
-
 
 # Environment comparison (shows different MiniGrid environments)
-
 python visualize.py \
-
    --mode env_comparison \
-
    --output_dir outputs/my_run/visualizations
-
-
 
 # Episode execution with distance trajectory plots
-
 python visualize.py \
-
    --mode episode_distances \
-
    --model_path outputs/my_run/checkpoints/best_model.pt \
-
    --output_dir outputs/my_run/visualizations
-
-
 
 # Generate all visualizations
-
 python visualize.py \
-
    --mode all \
-
    --model_path outputs/my_run/checkpoints/best_model.pt \
-
    --history_path outputs/my_run/training_history.json \
-
    --output_dir outputs/my_run/visualizations
-
 ```
 
 
@@ -383,41 +268,23 @@ After training and evaluation, the output directory will contain:
 
 
 ```
-
 outputs/my_run/
-
 |-- config.json                    # Training configuration
-
 |-- training_history.json          # Loss values per epoch
-
 |-- checkpoints/
-
 |   |-- best_model.pt              # Best validation checkpoint
-
 |   |-- final_model.pt             # Final epoch checkpoint
-
 |   |-- latest_checkpoint.pt       # Full checkpoint for resuming
-
 |-- evaluation/
-
 |   |-- evaluation_results.json    # Evaluation metrics
-
 |-- visualizations/
-
 |   |-- training_curves.png        # Loss curves
-
 |   |-- latent_space.png           # PCA visualization
-
 |   |-- planning_episode.png       # Planning progress
-
 |   |-- replan_comparison.png      # Replan frequency analysis
-
 |   |-- env_comparison.png         # MiniGrid environments comparison
-
 |   |-- episode_N_trajectory.png   # Step-by-step episode execution
-
 |   |-- episode_N_distances.png    # Distance to goal over time
-
 ```
 
 
